@@ -24,7 +24,6 @@ setInterval(function () {
 }, 1000)
 
 service.on('request', (rid, key, payload, handler) => {
-  console.log("coming here with payload", payload);
   if(payload.type === "order" && payload.order?.id) {
     // If processing is locked, add the request to the queue
     if (processingLock.locked) {
@@ -46,9 +45,7 @@ async function processOrder(payload, handler) {
 
    try {
      // Simulate an asynchronous operation 
-     console.log("coming ", 1);
      await new Promise((resolve) => setTimeout(resolve, 1000));
-     console.log('coming', 2);
  
      const matchedOrders = [];
      const indexToUpdate = orderBook.findIndex((a) => a.id === order.id);
